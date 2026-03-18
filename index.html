@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Github Issue Tracker</title>
+    <link rel="stylesheet" href="style/font.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        .font {
+            font-family: "Geist", sans-serif;
+            font-style: normal;
+        }
+
+        .demo-divide {
+            position: relative;
+            text-align: center;
+
+        }
+
+        .demo-divide::before {
+            content: "";
+            width: 120px;
+            height: 2px;
+            background-color: #e4e4e7;
+            display: block;
+            position: absolute;
+            top: 50%;
+            left: 0;
+        }
+
+        .demo-divide::after {
+            content: "";
+            width: 120px;
+            height: 2px;
+            background-color: #e4e4e7;
+            display: block;
+            position: absolute;
+            top: 50%;
+            right: 0;
+        }
+    </style>
+
+</head>
+
+<body class="font">
+    <!-- login Section -->
+    <section class="h-screen border 1px flex items-center">
+        <fieldset class="fieldset bg-base-200 border-base-300 mx-auto rounded-box w-xs border p-4">
+            <div class="mx-auto text-center">
+                <img class="ml-18" src="assets/github-logo.png" alt="">
+                <h3 class="text-2xl font-semibold">
+                    GitHub Issues Tracker
+                </h3>
+                <p class="text-[#64748b]">
+                    Sign in to manage your issues
+                </p>
+            </div>
+            <label class="label font-bold">Username</label>
+            <input type="email" class="input" placeholder="Enter Username" />
+
+            <label class="label font-bold">Password</label>
+            <input type="password" class="input" placeholder="Enter Password" />
+
+            <button class="btn btn-primary mt-4">Sign In</button>
+            <h3 class="demo-divide my-6">OR</h3>
+            <div class="text-center space-y-3">
+                <h3>Demo Credentials:</h3>
+                <div class="bg-[#eaecee] p-5 rounded-lg">
+                    <p class="font-semibold">Username: admin</p>
+                    <p class="font-semibold">Password: admin123</p>
+                </div>
+            </div>
+        </fieldset>
+    </section>
+
+    <!-- DashBoard -->
+     <section>
+        
+     </section>
+</body>
+
+</html>
