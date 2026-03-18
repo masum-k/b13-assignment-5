@@ -5,13 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Github Issue Tracker</title>
-    <link rel="stylesheet" href="style/font.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
+        .hidden {
+            display: none;
+        }
+
         .font {
             font-family: "Geist", sans-serif;
             font-style: normal;
@@ -50,7 +56,7 @@
 
 <body class="font">
     <!-- login Section -->
-    <section class="h-screen border 1px flex items-center">
+    <section id="loginSection" class="h-screen flex items-center">
         <fieldset class="fieldset bg-base-200 border-base-300 mx-auto rounded-box w-xs border p-4">
             <div class="mx-auto text-center">
                 <img class="ml-18" src="assets/github-logo.png" alt="">
@@ -62,12 +68,12 @@
                 </p>
             </div>
             <label class="label font-bold">Username</label>
-            <input type="email" class="input" placeholder="Enter Username" />
+            <input id="username" type="email" class="input outline-none" placeholder="Enter Username" />
 
             <label class="label font-bold">Password</label>
-            <input type="password" class="input" placeholder="Enter Password" />
+            <input id="password" type="password" class="input outline-none" placeholder="Enter Password" />
 
-            <button class="btn btn-primary mt-4">Sign In</button>
+            <button id="signInBtn" class="btn btn-primary mt-4">Sign In</button>
             <h3 class="demo-divide my-6">OR</h3>
             <div class="text-center space-y-3">
                 <h3>Demo Credentials:</h3>
@@ -79,10 +85,22 @@
         </fieldset>
     </section>
 
-    <!-- DashBoard -->
-     <section>
-        
-     </section>
+    <!-- Dash Board -->
+    <section>
+        <div class="navbar bg-base-100 shadow-sm flex justify-between px-7">
+            <div class="flex">
+                <img class="w-6 mr-1" src="assets/github-logo.png" alt="">
+                <h2>GitHub Issues Tracker</h2>
+            </div>
+            <div class="flex gap-2">
+                <input type="text" placeholder="Search Issues..."
+                    class="input outline-none input-bordered w-24 md:w-auto" />
+                <button class="btn btn-primary"><i class="fa-solid fa-plus"></i>New Issue</button>
+            </div>
+        </div>
+    </section>
+    
+    <script src="script/login.js"></script>
 </body>
 
 </html>
