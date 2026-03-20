@@ -368,3 +368,16 @@ const displayClosedIssues = (closeIssues) => {
 
 
 loadAllIssues()
+
+document.getElementById("input-search").addEventListener("keyup", () => {
+    const inputValue = document.getElementById("input-search").value;
+    const searchValue = inputValue.trim().toLowerCase();
+
+    fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues/")
+        .then(res => res.json())
+        .then(data => {
+            const allIssue = data.data
+            const filterIssue = allIssue.filter(issue => issue.title.toLowerCase().includes(searchValue));
+            displayAllIssues(filterIssue)
+        });
+});
