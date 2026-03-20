@@ -11,21 +11,32 @@ const signInBtn = document.getElementById("signInBtn").addEventListener("click",
     }
 })
 
-
+const loader = (status) => {
+    if (status == true) {
+        document.getElementById("loader").classList.remove("hidden")
+        document.getElementById("card-section").classList.add("hidden")
+    } else {
+        document.getElementById("card-section").classList.remove("hidden")
+        document.getElementById("loader").classList.add("hidden")
+    }
+}
 
 const loadOpenIssues = () => {
+    loader(true)
     fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
         .then(res => res.json())
         .then(data => displayOpenIssues(data.data))
 };
 
 const loadCloseIssues = () => {
+    loader(true)
     fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
         .then(res => res.json())
         .then(data => displayClosedIssues(data.data))
 };
 
 const loadAllIssues = () => {
+    loader(true)
     fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
         .then(res => res.json())
         .then(data => displayAllIssues(data.data))
@@ -50,40 +61,57 @@ const showModal = (data) => {
     </div>`;
     };
 
-    detailContainer.innerHTML = `
+    let btnClass = "";
+    if (data.priority === "high") {
+        btnClass = "bg-[#EB5971]";
+    } else if (data.priority === "medium") {
+        btnClass = "bg-[#E5A600]"
+    } else if (data.priority === "low") {
+        btnClass = "bg-[#3B25C1]"
+    }
+
+    let modalStatus = '';
+    if (data.status === "open") {
+        modalStatus = "bg-[#00A96E]"
+    }
+    else {
+        modalStatus = "bg-[#A755F6]"
+    }
+    detailContainer.innerHTML =
+        `
     <div>
-                        <h2>${data.title}</h2>
-                        <div class="flex">
-                            <p>
-                            <span>${data.status.toUpperCase()}</span>
-                            &bull;
-                            <span>Opened by <span>${data.assignee}</span>
-                            &bull;
-                            <span>${data.createdAt}</span>
-                            </p>
-                            
-                        </div>
-                        <div class="flex gap-2">
-                            <div class="badge border text-[#ef4444] border-[#fecaca] bg-[#feecec]">
-                                <img src="assets/bugdroid.png" alt="">
-                                <h3 class="text-[10px]">${data.labels[0].toUpperCase()}</h3>
-                            </div>
-                            ${labels}
-                        </div>
-                        <div>
-                            <p>${data.description}</p>
-                        </div>
-                        <div class="flex">
-                            <div>
-                                <p>Assignee:</p>
-                                <p>Fahim Ahmed</p>
-                            </div>
-                            <div>   
-                                <p>Priority:</p>                               
-                                <p>HIGH</p>                               
-                            </div>
-                        </div>
-                    </div>
+        <h2 class="text-2xl font-bold">${data.title}</h2>
+        <div class="flex gap-2">
+            <p><span class="${modalStatus} rounded-full px-2 text-xs capitalize text-white">${data.status}</ span>
+            </p>
+            &bull;
+            <p><span class="text-xs">Opened by <span>${data.assignee}</span></p>
+            &bull;
+            <p><span class="text-xs">${data.createdAt}</span></p>
+        </div>
+        <div class="flex gap-2 mt-4">
+            <div class="badge border text-[#ef4444] border-[#fecaca] bg-[#feecec]">
+                <img src="assets/bugdroid.png" alt="">
+                <h3 class="text-[10px]">${data.labels[0].toUpperCase()}</h3>
+            </div>
+            ${labels}
+        </div>
+        <div class="mt-4">
+            <p class="text-[#64748b]">${data.description}</p>
+        </div>
+        <div class="flex justify-between pr-32 pl-4 py-4 rounded-xl mt-4 bg-[#f8fafc]">
+            <div>
+                <p>Assignee:</p>
+                <p class="font-semibold">Fahim Ahmed</p>
+            </div>
+            <div>
+                <p>Priority:</p>
+                <button
+                    class="btn btn-xs text-white font-normal outline-none ${btnClass}">${data.priority.toUpperCase()}</button> 
+            </div>
+        </div>
+    </div>
+    </div>      
     `
     document.getElementById("my_modal_1").showModal();
 }
@@ -167,6 +195,7 @@ const displayAllIssues = (issues) => {
     `
         container.appendChild(div);
     });
+    loader(false)
 };
 
 const displayOpenIssues = (openIssues) => {
@@ -250,6 +279,7 @@ const displayOpenIssues = (openIssues) => {
             cardContainer.appendChild(div)
         }
     }
+    loader(false)
 };
 
 const displayClosedIssues = (closeIssues) => {
@@ -333,6 +363,7 @@ const displayClosedIssues = (closeIssues) => {
             cardContainer.appendChild(div)
         }
     }
+    loader(false)
 };
 
 

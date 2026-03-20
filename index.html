@@ -18,6 +18,10 @@
             display: none;
         } */
 
+        .capitalize {
+            text-transform: capitalize;
+        }
+
         .active {
             background-color: #4a00ff;
             color: white;
@@ -114,45 +118,48 @@
             <button id="close-btn" onclick="loadCloseIssues()" class="btn">Close</button>
         </div>
 
-        <!-- Issues -->
-        <div class="bg-white flex p-5 justify-between border 1px border-[#e4e4e7] rounded-t-lg">
-            <div class="flex items-center">
-                <img class="bg-[#ece4ff] rounded-full p-1 mr-2" src="assets/Aperture.png" alt="">
-                <div>
-                    <h3><span id="issues-count"></span> Issues</h3>
-                    <p>Track and manage your project issues</p>
-                </div>
-            </div>
-            <div class="flex items-center justify-center gap-2">
-                <img class="w-3" src="assets/Open-Status.png" alt="">
-                <h4>Open</h4>
-                <img class="w-3" src="assets/Closed-Status.png" alt="">
-                <h4>Close</h4>
-            </div>
+        <div id="loader" class="flex justify-center">
+            <span class="loading loading-dots loading-xl"></span>
         </div>
 
-        <!-- Cards -->
-        <div id="card-container" class="border border-[#e4e4e7] p-4 md:grid grid-cols-4 gap-2 space-y-2">
-
+        <div id="card-section">
+            <!-- Issues -->
+            <div class="bg-white flex p-5 justify-between border 1px border-[#e4e4e7] rounded-t-lg">
+                <div class="flex items-center">
+                    <img class="bg-[#ece4ff] rounded-full p-1 mr-2" src="assets/Aperture.png" alt="">
+                    <div>
+                        <h3><span id="issues-count"></span> Issues</h3>
+                        <p>Track and manage your project issues</p>
+                    </div>
+                </div>
+                <div class="flex items-center justify-center gap-2">
+                    <img class="w-3" src="assets/Open-Status.png" alt="">
+                    <h4>Open</h4>
+                    <img class="w-3" src="assets/Closed-Status.png" alt="">
+                    <h4>Close</h4>
+                </div>
+            </div>
+            <!-- Cards -->
+            <div id="card-container" class="border border-[#e4e4e7] p-4 md:grid grid-cols-4 gap-2 space-y-2">
+            </div>
         </div>
 
         <!-- Open the modal using ID.showModal() method -->
         <dialog id="my_modal_1" class="modal">
             <div class="modal-box">
                 <div id="detailContainer">
-                    
+
                 </div>
                 <div class="modal-action">
-                    <form method="dialog">
+                    <form id="modal-form" method="dialog">
                         <!-- if there is a button in form, it will close the modal -->
-                        <button class="btn">Close</button>
+                        <button class="btn btn-primary">Close</button>
                     </form>
                 </div>
             </div>
         </dialog>
 
     </section>
-
     <script src="script/login.js"></script>
 </body>
 
