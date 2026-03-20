@@ -109,9 +109,9 @@
     <section class="w-11/12 mx-auto">
         <!-- Button -->
         <div class="bg-white mt-10 mb-3 shadow rounded-lg p-4">
-            <button id="all-btn" onclick="LoadAllIssues()" class="btn active">All</button>
-            <button id="open-btn" onclick="LoadOpenIssues()" class="btn">Open</button>
-            <button id="close-btn" class="btn">Close</button>
+            <button id="all-btn" onclick="loadAllIssues()" class="btn active">All</button>
+            <button id="open-btn" onclick="loadOpenIssues()" class="btn">Open</button>
+            <button id="close-btn" onclick="loadCloseIssues()" class="btn">Close</button>
         </div>
 
         <!-- Issues -->
@@ -135,11 +135,13 @@
         <div id="card-container" class="border border-[#e4e4e7] p-4 md:grid grid-cols-4 gap-2 space-y-2">
 
         </div>
+
         <!-- Open the modal using ID.showModal() method -->
         <dialog id="my_modal_1" class="modal">
             <div class="modal-box">
-                <h3 class="text-lg font-bold">Hello!</h3>
-                <p class="py-4">Press ESC key or click the button below to close</p>
+                <div id="detailContainer">
+                    
+                </div>
                 <div class="modal-action">
                     <form method="dialog">
                         <!-- if there is a button in form, it will close the modal -->
