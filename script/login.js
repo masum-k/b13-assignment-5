@@ -1,15 +1,15 @@
-const signInBtn = document.getElementById("signInBtn").addEventListener("click", () => {
-    const userName = document.getElementById("username").value;
-    const passWord = document.getElementById("password").value;
+const loadAllIssues = () => {
+    loader(true)
+    fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
+        .then(res => res.json())
+        .then(data => displayAllIssues(data.data))
+};
 
-    if (userName !== "admin" || passWord !== "admin123") {
-        alert("Invalid Credentials");
-    }
-    else {
-        const loginSection = document.getElementById("loginSection");
-        loginSection.classList.add("hidden")
-    }
-})
+const loadModal = (id) => {
+    fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`)
+        .then(res => res.json())
+        .then(data => showModal(data.data))
+}
 
 const loader = (status) => {
     if (status == true) {
@@ -35,18 +35,23 @@ const loadCloseIssues = () => {
         .then(data => displayClosedIssues(data.data))
 };
 
-const loadAllIssues = () => {
-    loader(true)
-    fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
-        .then(res => res.json())
-        .then(data => displayAllIssues(data.data))
-};
+const signInBtn = document.getElementById("signInBtn").addEventListener("click", () => {
+    const userName = document.getElementById("username").value;
+    const passWord = document.getElementById("password").value;
 
-const loadModal = (id) => {
-    fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`)
-        .then(res => res.json())
-        .then(data => showModal(data.data))
-}
+    if (userName !== "admin" || passWord !== "admin123") {
+        alert("Invalid Credentials");
+    }
+    else {
+        const loginSection = document.getElementById("loginSection");
+        loginSection.classList.add("hidden")
+        const dashCoardCntainer = document.getElementById("dashboard-container");
+        dashCoardCntainer.classList.remove("hidden")
+        loadAllIssues();
+    };
+});
+
+
 
 const showModal = (data) => {
     const detailContainer = document.getElementById("detailContainer");
@@ -114,7 +119,7 @@ const showModal = (data) => {
     </div>      
     `
     document.getElementById("my_modal_1").showModal();
-}
+};
 
 const displayAllIssues = (issues) => {
     const openBtn = document.getElementById("open-btn");
@@ -366,8 +371,6 @@ const displayClosedIssues = (closeIssues) => {
     loader(false)
 };
 
-
-loadAllIssues()
 
 document.getElementById("input-search").addEventListener("keyup", () => {
     const inputValue = document.getElementById("input-search").value;

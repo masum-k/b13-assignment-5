@@ -14,9 +14,9 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
-        /* .hidden {
+        .hidden {
             display: none;
-        } */
+        }
 
         .capitalize {
             text-transform: capitalize;
@@ -65,7 +65,7 @@
 
 <body class="font bg-[#f8fafc]">
     <!-- login Section -->
-    <section id="loginSection" class="h-screen hidden flex items-center">
+    <section id="loginSection" class="h-screen flex items-center">
         <fieldset class="fieldset bg-white border-base-300 mx-auto rounded-box w-xs border p-4">
             <div class="mx-auto text-center">
                 <img class="ml-18" src="assets/github-logo.png" alt="">
@@ -94,72 +94,74 @@
         </fieldset>
     </section>
 
-    <!-- Navbar -->
-    <section>
-        <div class="navbar bg-base-100 shadow-sm flex justify-between px-7">
-            <div class="flex">
-                <img class="w-6 mr-1" src="assets/github-logo.png" alt="">
-                <h2>GitHub Issues Tracker</h2>
+    <div id="dashboard-container" class="hidden">
+        <!-- Navbar -->
+        <section>
+            <div class="navbar bg-base-100 shadow-sm flex justify-between px-7">
+                <div class="flex">
+                    <img class="w-6 mr-1" src="assets/github-logo.png" alt="">
+                    <h2>GitHub Issues Tracker</h2>
+                </div>
+                <div class="flex gap-2">
+                    <input id="input-search" type="text" placeholder="Search Issues..."
+                        class="input outline-none input-bordered w-24 md:w-auto" />
+                    <button class="btn btn-primary"><i class="fa-solid fa-plus"></i>New Issue</button>
+                </div>
             </div>
-            <div class="flex gap-2">
-                <input id="input-search" type="text" placeholder="Search Issues..."
-                    class="input outline-none input-bordered w-24 md:w-auto" />
-                <button class="btn btn-primary"><i class="fa-solid fa-plus"></i>New Issue</button>
+        </section>
+
+        <!-- Dash Board -->
+        <section class="w-11/12 mx-auto">
+            <!-- Button -->
+            <div class="bg-white mt-10 mb-3 shadow rounded-lg p-4">
+                <button id="all-btn" onclick="loadAllIssues()" class="btn active">All</button>
+                <button id="open-btn" onclick="loadOpenIssues()" class="btn">Open</button>
+                <button id="close-btn" onclick="loadCloseIssues()" class="btn">Close</button>
             </div>
-        </div>
-    </section>
 
-    <!-- Dash Board -->
-    <section class="w-11/12 mx-auto">
-        <!-- Button -->
-        <div class="bg-white mt-10 mb-3 shadow rounded-lg p-4">
-            <button id="all-btn" onclick="loadAllIssues()" class="btn active">All</button>
-            <button id="open-btn" onclick="loadOpenIssues()" class="btn">Open</button>
-            <button id="close-btn" onclick="loadCloseIssues()" class="btn">Close</button>
-        </div>
+            <div id="loader" class="flex justify-center">
+                <span class="loading loading-dots loading-xl"></span>
+            </div>
 
-        <div id="loader" class="flex justify-center">
-            <span class="loading loading-dots loading-xl"></span>
-        </div>
-
-        <div id="card-section">
-            <!-- Issues -->
-            <div class="bg-white flex p-5 justify-between border 1px border-[#e4e4e7] rounded-t-lg">
-                <div class="flex items-center">
-                    <img class="bg-[#ece4ff] rounded-full p-1 mr-2" src="assets/Aperture.png" alt="">
-                    <div>
-                        <h3><span id="issues-count"></span> Issues</h3>
-                        <p>Track and manage your project issues</p>
+            <div id="card-section">
+                <!-- Issues -->
+                <div class="bg-white flex p-5 justify-between border 1px border-[#e4e4e7] rounded-t-lg">
+                    <div class="flex items-center">
+                        <img class="bg-[#ece4ff] rounded-full p-1 mr-2" src="assets/Aperture.png" alt="">
+                        <div>
+                            <h3><span id="issues-count"></span> Issues</h3>
+                            <p>Track and manage your project issues</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-center gap-2">
+                        <img class="w-3" src="assets/Open-Status.png" alt="">
+                        <h4>Open</h4>
+                        <img class="w-3" src="assets/Closed-Status.png" alt="">
+                        <h4>Close</h4>
                     </div>
                 </div>
-                <div class="flex items-center justify-center gap-2">
-                    <img class="w-3" src="assets/Open-Status.png" alt="">
-                    <h4>Open</h4>
-                    <img class="w-3" src="assets/Closed-Status.png" alt="">
-                    <h4>Close</h4>
+                <!-- Cards -->
+                <div id="card-container" class="border border-[#e4e4e7] p-4 md:grid grid-cols-4 gap-2 space-y-2">
                 </div>
             </div>
-            <!-- Cards -->
-            <div id="card-container" class="border border-[#e4e4e7] p-4 md:grid grid-cols-4 gap-2 space-y-2">
-            </div>
-        </div>
 
-        <!-- Open the modal using ID.showModal() method -->
-        <dialog id="my_modal_1" class="modal">
-            <div class="modal-box">
-                <div id="detailContainer">
+            <!-- Open the modal using ID.showModal() method -->
+            <dialog id="my_modal_1" class="modal">
+                <div class="modal-box">
+                    <div id="detailContainer">
 
+                    </div>
+                    <div class="modal-action">
+                        <form id="modal-form" method="dialog">
+                            <!-- if there is a button in form, it will close the modal -->
+                            <button class="btn btn-primary">Close</button>
+                        </form>
+                    </div>
                 </div>
-                <div class="modal-action">
-                    <form id="modal-form" method="dialog">
-                        <!-- if there is a button in form, it will close the modal -->
-                        <button class="btn btn-primary">Close</button>
-                    </form>
-                </div>
-            </div>
-        </dialog>
+            </dialog>
 
-    </section>
+        </section>
+    </div>
     <script src="script/login.js"></script>
 </body>
 
